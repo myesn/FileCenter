@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <title>preview</title>
+    <style>
+    #clearAndRetrive {
+        margin: 10px;
+        width: 150px;
+        height: 40px;
+    }
+  </style>
+</head>
+<body>
+    <button id="clearAndRetrive">clear and retrive</button>
+    <div id="container">
+
+    </div>
+    <script src="jquery.min.js"></script>
+    <script>
+        var cacheKey = 'files';
+
+        function get(callback) {
+            $.get('preview', function (res) {
+                callback(res);
+            });
+        }
+
+        function render(files) {
+            var html = '';
+            for (var i = 0; i < files.length; i++) {
+                html += '<video preload="none" controls width="380" height="260" src="preview/screenshot/' + files[i] + '.mp4" controls="controls" poster="preview/screenshot/' + files[i] + '.jpg">您的浏览器不支持 video 标签。</video>';
+            }
+            $('#container').html(html);
+
+            var videos = $('video');
+            $.each(videos, function (i, v) {
+                v.volume = 0.0;
+            });
+        }
+
+        function local() {
+            render(JSON.parse(localStorage.getItem(cacheKey)));
+        }
+
+        function retrive() {
+            get(function (files) {
+                localStorage.setItem(cacheKey, JSON.stringify(files));
+
+                render(files);
+            });
+        }
+
+        $(function () {
+            if (localStorage.getItem(cacheKey)) {
+                local();
+            } else {
+                retrive();
+            }
+
+            $('#clearAndRetrive').click(function () {
+                localStorage.removeItem(cacheKey);
+                retrive();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Upo.FileCenter</AssemblyName>
+    <RootNamespace>Upo.FileCenter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Upo.CRUD.BasicMutableService" Version="0.1.0" />
+    <PackageReference Include="Upo.CRUD.BasicProvider" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileCenter.Abstractions\FileCenter.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

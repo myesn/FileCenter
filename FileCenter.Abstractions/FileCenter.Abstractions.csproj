@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Upo.FileCenter.Abstractions</AssemblyName>
+    <RootNamespace>Upo.FileCenter</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Upo.CRUD.Abstractions" Version="0.1.0" />
+  </ItemGroup>
+
+</Project>
