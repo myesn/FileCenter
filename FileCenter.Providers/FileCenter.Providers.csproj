@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Upo.FileCenter</AssemblyName>
-    <RootNamespace>Upo.FileCenter</RootNamespace>
+    <AssemblyName>Upo.FileCenter.Providers</AssemblyName>
+    <RootNamespace>Upo.FileCenter.Providers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

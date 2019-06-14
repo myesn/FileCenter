@@ -12,4 +12,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileCenter.Abstractions\FileCenter.Abstractions.csproj" />
+    <ProjectReference Include="..\FileCenter.CommandHandlers\FileCenter.CommandHandlers.csproj" />
+    <ProjectReference Include="..\FileCenter.EFCore\FileCenter.EFCore.csproj" />
+    <ProjectReference Include="..\FileCenter.Providers\FileCenter.Providers.csproj" />
+  </ItemGroup>
+
 </Project>

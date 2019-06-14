@@ -86,7 +86,6 @@ namespace Upo.FileCenter.Host.Controllers
 
                     ok = true;
                 }
-
             }
             catch (Exception ex)
             {

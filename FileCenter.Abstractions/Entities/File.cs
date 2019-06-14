@@ -13,6 +13,7 @@ namespace Upo.FileCenter
         public string PhysicalPath { get; set; }
         public string ContentType { get; set; }
         public long Length { get; set; }
+        public string DisplaySize { get; set; }
         public long DownloadTimes { get; set; }
         public bool IsPrivate { get; set; } = false;
         public bool IsDeleted { get; set; } = false;

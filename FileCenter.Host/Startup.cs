@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.WebSockets;
@@ -18,24 +17,27 @@ namespace Upo.FileCenter.Host
     public class Startup
     {
         private readonly IHostingEnvironment _env;
-        public IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
+
         public Startup(IHostingEnvironment env, IConfiguration configuration)
         {
             this._env = env;
-            this.Configuration = configuration;
+            this._configuration = configuration;
         }
         
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<FileCenterHostOptions>(Configuration.GetSection(nameof(FileCenterHostOptions)));
+            services.Configure<FileCenterHostOptions>(_configuration.GetSection(nameof(FileCenterHostOptions)));
             services.AddSingleton<FFMPEGHelper>();
+
+            services
+                .AddFileCenterEntityFrameworkMySql(_configuration.GetConnectionString("FileDb"))
+                .AddFileCenterProviders()
+                .AddFileCenterCommandHandlers();
 
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -167,7 +169,7 @@ namespace Upo.FileCenter.Host
         {
             try
             {
-                using (var output = File.Create(filePath))
+                using (var output = System.IO.File.Create(filePath))
                 {
                     await output.WriteAsync(buffer, 0, buffer.Length);
                 }
@@ -185,11 +187,11 @@ namespace Upo.FileCenter.Host
         private async Task Merge(string inputDirectoryPath, string inputFileNamePattern, string outputFilePath)
         {
             string[] inputFilePaths = Directory.GetFiles(inputDirectoryPath, inputFileNamePattern);
-            using (var outputStream = File.Create(outputFilePath))
+            using (var outputStream = System.IO.File.Create(outputFilePath))
             {
                 foreach (var inputFilePath in inputFilePaths)
                 {
-                    using (var inputStream = File.OpenRead(inputFilePath))
+                    using (var inputStream = System.IO.File.OpenRead(inputFilePath))
                     {
                         // Buffer size can be passed as the second argument.
                         await inputStream.CopyToAsync(outputStream);

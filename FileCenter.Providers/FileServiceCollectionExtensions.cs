@@ -10,7 +10,6 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddFileEntityFrameworkMySql(this IServiceCollection services)
         {
             services.AddScoped<IFileProvider, FileProvider>();
-            services.AddScoped<IFileMutableService, FileMutableService>();
 
             return services;
         }
