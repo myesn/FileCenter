@@ -9,7 +9,7 @@ namespace Upo.FileCenter
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public string FileName { get; set; }
-        public string ExtensionWithoutDot { get; set; }
+        public string Extensions { get; set; }
         public string PhysicalPath { get; set; }
         public string ContentType { get; set; }
         public long Length { get; set; }
